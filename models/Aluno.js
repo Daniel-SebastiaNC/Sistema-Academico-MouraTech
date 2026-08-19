@@ -20,7 +20,7 @@ class Aluno {
     }
 
     toString() {
-        return 0;
+        return `${this.nome} | Turma: ${this.turma} | Notas: [${this.notas.join(", ")}] | Media: ${this.calcularMedia().toFixed(2)} | ${this.getStatus()}`;
     }
 }
 

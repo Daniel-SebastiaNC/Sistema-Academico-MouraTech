@@ -43,6 +43,7 @@ describe("Aluno", () => {
   });
  
   describe("toString", () => {
+
     test("formata corretamente as informações do aluno aprovado", () => {
       const aluno = new Aluno("João", [8, 9, 7], "3A");
       const esperado = "João | Turma: 3A | Notas: [8, 9, 7] | Media: 8.00 | Aprovado";
