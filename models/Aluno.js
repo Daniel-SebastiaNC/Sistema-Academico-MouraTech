@@ -1,5 +1,3 @@
-const STATUS_APROVADO = "Aprovado";
-const STATUS_REPROVADO = "Reprovado";
 class Aluno {
     static MEDIA_MINIMA_APROVACAO = 7;
     constructor(nome, notas, turma) {
@@ -18,7 +16,7 @@ class Aluno {
     }
 
     getStatus() {
-        return this.isAprovado() ? STATUS_APROVADO : STATUS_REPROVADO;
+        return this.isAprovado() ? "Aprovado" : "Reprovado";
     }
 
     toString() {
