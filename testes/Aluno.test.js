@@ -10,9 +10,15 @@ describe("Aluno", () => {
       test("retorna NaN quando não há notas (array vazio)", () => {
         const aluno = new Aluno("Ana", [], "3B");
         expect(aluno.calcularMedia()).toBeNaN();
-    
     });
 
+     describe("isAprovado", () => {
+      test("retorna true quando a média é maior que 7", () => {
+      const aluno = new Aluno("João", [8, 8, 8], "3A");
+      expect(aluno.isAprovado()).toBe(true);
+    });
+    
+  });
   }); 
 });
  
