@@ -6,8 +6,7 @@ class Aluno {
     }
 
     calcularMedia() {
-        const soma = this.notas.reduce((acc, nota) => acc + nota, 0);
-        return soma / this.notas.length;
+         return 0;
     }
 
     isAprovado() {
@@ -23,4 +22,4 @@ class Aluno {
     }
 }
 
-module.exports = Aluno;
+export default Aluno;
