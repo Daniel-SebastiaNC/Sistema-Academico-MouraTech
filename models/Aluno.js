@@ -16,7 +16,7 @@ class Aluno {
     }
 
     getStatus() {
-        return 0;
+        return this.isAprovado() ? "Aprovado" : "Reprovado";
     }
 
     toString() {

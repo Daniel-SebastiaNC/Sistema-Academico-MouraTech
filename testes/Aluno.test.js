@@ -36,6 +36,7 @@ describe("Aluno", () => {
       expect(aluno.getStatus()).toBe("Aprovado");
     });
 
+    
   });
 });
  
