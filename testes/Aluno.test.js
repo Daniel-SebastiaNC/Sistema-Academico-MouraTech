@@ -17,7 +17,6 @@ describe("Aluno", () => {
       const aluno = new Aluno("João", [8, 8, 8], "3A");
       expect(aluno.isAprovado()).toBe(true);
     });
-    
   });
   }); 
 });

@@ -11,7 +11,7 @@ class Aluno {
     }
 
     isAprovado() {
-        return 0;
+        return this.calcularMedia() >= 7;
     }
 
     getStatus() {
