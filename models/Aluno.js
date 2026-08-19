@@ -6,6 +6,9 @@ class Aluno {
     }
 
     calcularMedia() {
+        if (this.notas.length === 0) {
+            return NaN;
+        }
          const soma = this.notas.reduce((acc, nota) => acc + nota, 0);
         return soma / this.notas.length;
     }
