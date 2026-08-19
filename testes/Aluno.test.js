@@ -25,8 +25,8 @@ describe("Aluno", () => {
     test("retorna false quando a média é menor que 7", () => {
       const aluno = new Aluno("Carlos", [5, 6, 6], "3A");
       expect(aluno.isAprovado()).toBe(false);
+      
     });
-
     });
   });
   }); 
