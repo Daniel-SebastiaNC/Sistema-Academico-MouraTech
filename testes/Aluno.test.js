@@ -36,7 +36,11 @@ describe("Aluno", () => {
       expect(aluno.getStatus()).toBe("Aprovado");
     });
 
-    
+    test('retorna "Reprovado" quando isAprovado é false', () => {
+      const aluno = new Aluno("Carlos", [3, 4, 5], "3A");
+      expect(aluno.getStatus()).toBe("Reprovado");
+    });
+
   });
 });
  
