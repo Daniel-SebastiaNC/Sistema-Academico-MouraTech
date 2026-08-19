@@ -12,8 +12,7 @@ class Aluno {
     }
 
     isAprovado() {
-        const media = this.calcularMedia();
-        return media >= MEDIA_MINIMA_APROVACAO; 
+        return 0;
     }
 
     getStatus() {
