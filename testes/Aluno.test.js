@@ -19,7 +19,7 @@ describe("Aluno", () => {
       expect(aluno.isAprovado()).toBe(true);
     });
  
-    test("retorna true quando a média é exatamente 7", () => {
+    test("retorna true quando a média é exatamente 7 (limite)", () => {
       const aluno = new Aluno("João", [7, 7, 7], "3A");
       expect(aluno.isAprovado()).toBe(true);
     });
@@ -35,12 +35,19 @@ describe("Aluno", () => {
       const aluno = new Aluno("João", [9, 9, 9], "3A");
       expect(aluno.getStatus()).toBe("Aprovado");
     });
-
+ 
     test('retorna "Reprovado" quando isAprovado é false', () => {
       const aluno = new Aluno("Carlos", [3, 4, 5], "3A");
       expect(aluno.getStatus()).toBe("Reprovado");
     });
-
+  });
+ 
+  describe("toString", () => {
+    test("formata corretamente as informações do aluno aprovado", () => {
+      const aluno = new Aluno("João", [8, 9, 7], "3A");
+      const esperado = "João | Turma: 3A | Notas: [8, 9, 7] | Media: 8.00 | Aprovado";
+      expect(aluno.toString()).toBe(esperado);
+    });
  
   });
 });

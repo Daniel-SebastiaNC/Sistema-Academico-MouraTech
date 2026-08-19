@@ -1,5 +1,5 @@
+const mediaMinimaAprovacao = 7;
 class Aluno {
-    static MEDIA_MINIMA_APROVACAO = 7;
     constructor(nome, notas, turma) {
         this.nome = nome;
         this.notas = notas;
@@ -12,7 +12,7 @@ class Aluno {
     }
 
     isAprovado() {
-        return this.calcularMedia() >= Aluno.MEDIA_MINIMA_APROVACAO;
+        return this.calcularMedia() >= mediaMinimaAprovacao;
     }
 
     getStatus() {
@@ -20,7 +20,7 @@ class Aluno {
     }
 
     toString() {
-        return `${this.nome} | Turma: ${this.turma} | Notas: [${this.notas.join(", ")}] | Media: ${this.calcularMedia().toFixed(2)} | ${this.getStatus()}`;
+        return 0;
     }
 }
 
