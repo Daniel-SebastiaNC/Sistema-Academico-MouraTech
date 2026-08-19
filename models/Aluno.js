@@ -1,5 +1,5 @@
-const MEDIA_MINIMA_APROVACAO = 7;
 class Aluno {
+    static MEDIA_MINIMA_APROVACAO = 7;
     constructor(nome, notas, turma) {
         this.nome = nome;
         this.notas = notas;
@@ -12,8 +12,7 @@ class Aluno {
     }
 
     isAprovado() {
-        const media = this.calcularMedia();
-        return media >= MEDIA_MINIMA_APROVACAO; 
+        return this.calcularMedia() >= Aluno.MEDIA_MINIMA_APROVACAO;
     }
 
     getStatus() {
