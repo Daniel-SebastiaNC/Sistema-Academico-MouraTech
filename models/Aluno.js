@@ -24,7 +24,7 @@ class Aluno {
     const mediaFormatada = this.calcularMedia().toFixed(2);
     const status = this.getStatus();
 
-    return 0;
+    return `${this.nome} | Turma: ${this.turma} | Notas: [${notasFormatadas}] | Media: ${mediaFormatada} | ${status}`;
 }
 }
 
