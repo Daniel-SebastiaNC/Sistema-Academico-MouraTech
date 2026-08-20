@@ -49,6 +49,12 @@ describe("Aluno", () => {
       const esperado = "João | Turma: 3A | Notas: [8, 9, 7] | Media: 8.00 | Aprovado";
       expect(aluno.toString()).toBe(esperado);
     });
+     
+      test("formata corretamente as informações do aluno reprovado", () => {
+      const aluno = new Aluno("Carlos", [4, 5, 6], "3B");
+      const esperado = "Carlos | Turma: 3B | Notas: [4, 5, 6] | Media: 5.00 | Reprovado";
+      expect(aluno.toString()).toBe(esperado);
+    });
  
   });
 });
