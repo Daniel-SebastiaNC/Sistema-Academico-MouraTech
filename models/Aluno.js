@@ -19,9 +19,13 @@ class Aluno {
         return this.isAprovado() ? "Aprovado" : "Reprovado";
     }
 
-    toString() {
-        return `${this.nome} | Turma: ${this.turma} | Notas: [${this.notas.join(", ")}] | Media: ${this.calcularMedia().toFixed(2)} | ${this.getStatus()}`;
-    }
+   toString() {
+    const notasFormatadas = this.notas.join(", ");
+    const mediaFormatada = this.calcularMedia().toFixed(2);
+    const status = this.getStatus();
+
+    return `${this.nome} | Turma: ${this.turma} | Notas: [${notasFormatadas}] | Media: ${mediaFormatada} | ${status}`;
+}
 }
 
 export default Aluno;
