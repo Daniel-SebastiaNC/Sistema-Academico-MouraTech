@@ -21,7 +21,7 @@ class SistemaAcademico {
     }
 
     listarTodosAlunos() {
-        return [];
+        return [...this.turmas.values()].flatMap(turma => turma.alunos);
     }
 
     getAnaliticaGeral() {
