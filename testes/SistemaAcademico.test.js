@@ -1,5 +1,4 @@
 import SistemaAcademico from "../models/SistemaAcademico";
-import Turma from "../models/Turma";
 
 describe("SistemaAcademico", () => {
 
