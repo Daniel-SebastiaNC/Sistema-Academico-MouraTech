@@ -25,7 +25,7 @@ class SistemaAcademico {
     }
 
     getAnaliticaGeral() {
-        return 0;
+        return { melhorAluno: null, piorAluno: null, porTurma: [] };
     }
 }
 
