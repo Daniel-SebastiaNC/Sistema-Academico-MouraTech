@@ -7,7 +7,11 @@ class SistemaAcademico {
     }
 
     cadastrarAluno(nome, notas, nomeTurma) {
+        this.turmas.set(nomeTurma, new Turma(nomeTurma));
         
+        const aluno = new Aluno(nome, notas, nomeTurma);
+        this.turmas.get(nomeTurma).adicionarAluno(aluno);
+        return aluno;
     }
 
     getTurma(nomeTurma) {
