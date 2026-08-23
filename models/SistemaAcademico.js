@@ -25,7 +25,27 @@ class SistemaAcademico {
     }
 
     getAnaliticaGeral() {
-        return { melhorAluno: null, piorAluno: null, porTurma: [] };
+        const todos = this.listarTodosAlunos();
+
+        if (todos.length === 0) {
+            return { melhorAluno: null, piorAluno: null, porTurma: [] };
+        }
+
+        const melhorAluno = todos.reduce((melhor, atual) =>
+            atual.calcularMedia() > melhor.calcularMedia() ? atual : melhor
+        );
+        const piorAluno = todos.reduce((pior, atual) =>
+            atual.calcularMedia() < pior.calcularMedia() ? atual : pior
+        );
+
+        const porTurma = [...this.turmas.values()].map(turma => ({
+            turma: turma.nome,
+            media: turma.calcularMediaTurma(),
+            aprovados: turma.getAprovados().length,
+            reprovados: turma.getReprovados().length
+        }));
+
+        return { melhorAluno, piorAluno, porTurma };
     }
 }
 
