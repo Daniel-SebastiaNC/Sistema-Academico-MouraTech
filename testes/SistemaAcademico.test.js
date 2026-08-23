@@ -70,5 +70,51 @@ describe("SistemaAcademico", () => {
                 porTurma: []
             });
         });
+
+        test("deve calcular estatísticas por turma corretamente" , () => {
+            sistema.cadastrarAluno("João", [8, 7, 9], "Turma A");   // média 8   -> aprovado
+            sistema.cadastrarAluno("Maria", [4, 5, 3], "Turma A");  // média 4   -> reprovado
+            sistema.cadastrarAluno("Pedro", [10, 10, 10], "Turma B"); // média 10 -> aprovado
+            sistema.cadastrarAluno("Ana", [6, 6, 6], "Turma B");    // média 6   -> reprovado
+        
+            const { porTurma } = sistema.getAnaliticaGeral();
+        
+            const turmaA = porTurma.find(t => t.turma === "Turma A");
+            const turmaB = porTurma.find(t => t.turma === "Turma B");
+        
+            expect(turmaA).toEqual({
+                turma: "Turma A",
+                media: 6, // (8 + 4) / 2
+                aprovados: 1,
+                reprovados: 1
+            });
+        
+            expect(turmaB).toEqual({
+                turma: "Turma B",
+                media: 8, // (10 + 6) / 2
+                aprovados: 1,
+                reprovados: 1
+            });
+        });
+
+        test("deve considerar aluno com média exatamente 7 como aprovado (limite mínimo)" , () => {
+            sistema.cadastrarAluno("Carlos", [7, 7, 7], "Turma A");
+ 
+            const { porTurma } = sistema.getAnaliticaGeral();
+        
+            expect(porTurma[0].aprovados).toBe(1);
+            expect(porTurma[0].reprovados).toBe(0);
+        });
+
+        test("deve identificar corretamente o melhor e o pior aluno" , () => {
+             sistema.cadastrarAluno("João", [8, 7, 9], "Turma A");   // média 8
+            sistema.cadastrarAluno("Maria", [4, 5, 3], "Turma A");  // média 4
+            sistema.cadastrarAluno("Pedro", [10, 10, 10], "Turma B"); // média 10
+        
+            const { melhorAluno, piorAluno } = sistema.getAnaliticaGeral();
+        
+            expect(melhorAluno.nome).toBe("Pedro");
+            expect(piorAluno.nome).toBe("Maria");
+        });
     });
 });
