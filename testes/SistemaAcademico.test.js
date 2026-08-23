@@ -60,4 +60,15 @@ describe("SistemaAcademico", () => {
         });
     });
 
+    describe("getAnaliticaGeral", () => {
+        test("deve retornar valores nulos/vazios quando não há alunos" , () => {
+            const resultado = sistema.getAnaliticaGeral();
+ 
+            expect(resultado).toEqual({
+                melhorAluno: null,
+                piorAluno: null,
+                porTurma: []
+            });
+        });
+    });
 });
