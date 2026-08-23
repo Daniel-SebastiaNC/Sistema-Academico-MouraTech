@@ -21,7 +21,7 @@ class SistemaAcademico {
     }
 
     listarTodosAlunos() {
-        return 0;
+        return [];
     }
 
     getAnaliticaGeral() {
