@@ -41,4 +41,10 @@ describe("SistemaAcademico", () => {
         });
     });
 
+    describe("listarTodosAlunos", () => {
+        test("deve retornar array vazio quando não há alunos cadastrados" , () => {
+            expect(sistema.listarTodosAlunos()).toEqual([]);
+        });
+    });
+
 });
