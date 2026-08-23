@@ -1,5 +1,5 @@
-const Aluno = require("./Aluno");
-const Turma = require("./Turma");
+import Aluno from "./Aluno.js";
+import Turma from "./Turma.js";
 
 class SistemaAcademico {
     constructor() {
@@ -49,4 +49,4 @@ class SistemaAcademico {
     }
 }
 
-module.exports = SistemaAcademico;
+export default SistemaAcademico;

@@ -23,4 +23,4 @@ class Turma {
     }
 }
 
-module.exports = Turma;
+export default Turma;

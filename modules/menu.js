@@ -1,4 +1,4 @@
-const readline = require("readline");
+import readline from "readline";
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -216,4 +216,4 @@ async function menuListarAlunos(sistema) {
     await aguardarContinuar();
 }
 
-module.exports = { menu };
+export{ menu };

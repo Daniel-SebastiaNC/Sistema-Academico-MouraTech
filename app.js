@@ -1,5 +1,5 @@
-const SistemaAcademico = require("./models/SistemaAcademico");
-const { menu } = require("./modules/menu");
+import SistemaAcademico from "./models/SistemaAcademico.js";
+import { menu } from "./modules/menu.js";
 
 const sistema = new SistemaAcademico();
 
