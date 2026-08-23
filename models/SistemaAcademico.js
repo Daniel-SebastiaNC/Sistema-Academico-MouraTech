@@ -17,7 +17,7 @@ class SistemaAcademico {
     }
 
     getTurma(nomeTurma) {
-        return this.turmas.get(nomeTurma);
+        return 0;
     }
 
     listarTodosAlunos() {
