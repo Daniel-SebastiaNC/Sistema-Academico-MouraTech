@@ -45,6 +45,19 @@ describe("SistemaAcademico", () => {
         test("deve retornar array vazio quando não há alunos cadastrados" , () => {
             expect(sistema.listarTodosAlunos()).toEqual([]);
         });
+
+        test("deve listar alunos de múltiplas turmas em um único array" , () => {
+            sistema.cadastrarAluno("João", [8, 7, 9], "Turma A");
+            sistema.cadastrarAluno("Maria", [6, 5, 7], "Turma B");
+            sistema.cadastrarAluno("Pedro", [10, 10, 10], "Turma A");
+        
+            const todos = sistema.listarTodosAlunos();
+        
+            expect(todos).toHaveLength(3);
+            expect(todos.map(a => a.nome)).toEqual(
+                expect.arrayContaining(["João", "Maria", "Pedro"])
+            );
+        });
     });
 
 });
