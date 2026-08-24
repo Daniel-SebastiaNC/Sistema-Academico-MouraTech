@@ -103,7 +103,6 @@ describe("Turma", () => {
     turma.adicionarAluno(aluno3);
 
     const reprovados = turma.getReprovados();
-
     expect(reprovados).toEqual([aluno2, aluno3, aluno1]); // Maria(1), Pedro(3), João(4)
   });
 });
