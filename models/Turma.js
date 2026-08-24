@@ -18,7 +18,7 @@ class Turma {
         0
     );
 
-    return soma / this.alunos.length;
+    return Math.round((soma / this.alunos.length) * 100) / 100;
 }
 
     getAprovados() {
