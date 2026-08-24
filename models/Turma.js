@@ -5,7 +5,7 @@ class Turma {
     }
 
     adicionarAluno(aluno) {
-        
+    this.alunos.push(aluno);
 }
 
     calcularMediaTurma() {
