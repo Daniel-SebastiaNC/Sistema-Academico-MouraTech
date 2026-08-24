@@ -90,4 +90,20 @@ describe("Turma", () => {
     expect(reprovados).toHaveLength(1);
     expect(reprovados).toContain(reprovado);
   });
+
+  test("getReprovados deve retornar os reprovados ordenados por média (menor para maior)", () => {
+    const turma = new Turma("3A");
+
+    const aluno1 = new Aluno("João", [4, 4, 4], "3A");   // média 4
+    const aluno2 = new Aluno("Maria", [1, 1, 1], "3A");  // média 1
+    const aluno3 = new Aluno("Pedro", [3, 3, 3], "3A");  // média 3
+
+    turma.adicionarAluno(aluno1);
+    turma.adicionarAluno(aluno2);
+    turma.adicionarAluno(aluno3);
+
+    const reprovados = turma.getReprovados();
+
+    expect(reprovados).toEqual([aluno2, aluno3, aluno1]); // Maria(1), Pedro(3), João(4)
+  });
 });
