@@ -11,9 +11,6 @@ class Turma {
 }
 
     calcularMediaTurma() {
-        if (this.alunos.length === 0) return 0;
-        const soma = this.alunos.reduce((acc, aluno) => acc + aluno.calcularMedia(), 0);
-        return soma / this.alunos.length;
     }
 
     getAprovados() {
