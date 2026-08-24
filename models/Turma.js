@@ -24,7 +24,11 @@ class Turma {
     getAprovados() {
     return this.alunos
         .filter(aluno => aluno.isAprovado())
-        .sort((a, b) => b.calcularMedia() - a.calcularMedia());
+        .sort((a, b) => {
+            const diferencaMedia = b.calcularMedia() - a.calcularMedia();
+            if (diferencaMedia !== 0) return diferencaMedia;
+            return a.nome.localeCompare(b.nome);
+        });
 }
 
     getReprovados() {
