@@ -22,7 +22,10 @@ class Turma {
 }
 
     getAprovados() {
-    }
+    return this.alunos
+        .filter(aluno => aluno.isAprovado())
+        .sort((a, b) => b.calcularMedia() - a.calcularMedia());
+}
 
     getReprovados() {
         return this.alunos.filter(aluno => !aluno.isAprovado());

@@ -45,13 +45,13 @@ describe("Turma", () => {
 
     expect(turma.calcularMediaTurma()).toBe(6.67);
   });
-  
+
     test("getAprovados deve retornar os aprovados ordenados por média (maior para menor)", () => {
     const turma = new Turma("3A");
 
-    const aluno1 = new Aluno("João", [7, 7, 7], "3A");
+    const aluno1 = new Aluno("João", [8, 8, 9], "3A");
     const aluno2 = new Aluno("Maria", [9, 9, 9], "3A");  
-    const aluno3 = new Aluno("Pedro", [6, 6, 6], "3A");  
+    const aluno3 = new Aluno("Pedro", [8, 8, 8], "3A");  
 
     turma.adicionarAluno(aluno1);
     turma.adicionarAluno(aluno2);
