@@ -75,4 +75,19 @@ describe("Turma", () => {
 
     expect(aprovados).toEqual([aluno2, aluno1]); //aqui Ana é pra ser antes de Zeca, por ordem alfabética
   });
+
+  test("getReprovados deve retornar apenas os alunos reprovados", () => {
+    const turma = new Turma("3A");
+
+    const aprovado = new Aluno("João", [8, 8, 8], "3A");
+    const reprovado = new Aluno("Maria", [4, 4, 4], "3A");
+
+    turma.adicionarAluno(aprovado);
+    turma.adicionarAluno(reprovado);
+
+    const reprovados = turma.getReprovados();
+
+    expect(reprovados).toHaveLength(1);
+    expect(reprovados).toContain(reprovado);
+  });
 });

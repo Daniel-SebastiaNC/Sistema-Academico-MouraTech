@@ -32,7 +32,6 @@ class Turma {
 }
 
     getReprovados() {
-        return this.alunos.filter(aluno => !aluno.isAprovado());
     }
 }
 
