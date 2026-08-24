@@ -8,4 +8,14 @@ describe("Turma", () => {
     turma.adicionarAluno(aluno);
     expect(turma.alunos).toHaveLength(1);
   });
+    test("não deve adicionar o mesmo aluno duas vezes", () => {
+    const turma = new Turma("3A");
+
+    const aluno = new Aluno("João", [8, 8, 8], "3A");
+
+    turma.adicionarAluno(aluno);
+    turma.adicionarAluno(aluno);
+
+    expect(turma.alunos).toHaveLength(1);
+});
 });
