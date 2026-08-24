@@ -19,7 +19,7 @@ class Turma {
     );
 
     return soma / this.alunos.length;
-    }
+}
 
     getAprovados() {
         return this.alunos.filter(aluno => aluno.isAprovado());
