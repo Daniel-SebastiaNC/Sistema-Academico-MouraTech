@@ -62,4 +62,17 @@ describe("Turma", () => {
     expect(aprovados).toEqual([aluno2, aluno1, aluno3]);
   });
 
+  test("getAprovados deve desempatar por nome quando as médias forem iguais", () => {
+    const turma = new Turma("3A");
+
+    const aluno1 = new Aluno("Zeca", [8, 8, 8], "3A");  // média 8
+    const aluno2 = new Aluno("Ana", [8, 8, 8], "3A");    // média 8, vai igualar Zeca
+
+    turma.adicionarAluno(aluno1);
+    turma.adicionarAluno(aluno2);
+
+    const aprovados = turma.getAprovados();
+
+    expect(aprovados).toEqual([aluno2, aluno1]); //aqui Ana é pra ser antes de Zeca, por ordem alfabética
+  });
 });
