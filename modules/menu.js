@@ -1,4 +1,5 @@
 import readline from "readline";
+import { buscarAluno } from "./api.js";
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -57,7 +58,7 @@ async function aguardarContinuar() {
 async function menu(sistema) {
     let opcao = 0;
 
-    while (opcao !== 5) {
+    while (opcao !== 6) {
         console.clear();
         console.log(`${"=".repeat(50)}`);
         console.log(`   SISTEMA DE ANALISE DE NOTAS`);
@@ -66,7 +67,8 @@ async function menu(sistema) {
         console.log(`   2 - Analisar Turma`);
         console.log(`   3 - Ver Analitica Geral`);
         console.log(`   4 - Listar Todos os Alunos`);
-        console.log(`   5 - Sair`);
+        console.log(`   5 - Buscar Aluno (API)`);
+        console.log(`   6 - Sair`);
         console.log(`${"=".repeat(50)}`);
 
         let resposta = await question("  Escolha uma opção: ");
@@ -92,10 +94,12 @@ async function menu(sistema) {
                 break;
 
             case 5:
+                await menuBuscarAlunoAPI();
+                break;
+
+            case 6:
                 console.clear();
-                console.log(`\n${"=".repeat(50)}`);
-                console.log(`   Encerrando programa... Ate logo!`);
-                console.log(`${"=".repeat(50)}\n`);
+                console.log(`\n   Encerrando programa. \n`);
                 rl.close();
                 break;
 
@@ -213,6 +217,37 @@ async function menuListarAlunos(sistema) {
     }
 
     console.log(`${"-".repeat(50)}\n`);
+    await aguardarContinuar();
+}
+
+async function menuBuscarAlunoAPI() {
+    console.clear();
+    console.log(`\n${"-".repeat(50)}`);
+    console.log(`   BUSCAR ALUNO NA API `);
+    console.log(`${"-".repeat(50)}\n`);
+
+    const idInput = await question("  Digite o ID do aluno a consultar: ");
+    const id = parseInt(idInput);
+
+    console.log(`\n  Consultando API... Aguarde.`);
+
+    await new Promise((resolve) => {
+        buscarAluno(id)
+            .then((aluno) => {
+                console.log(`\n   Aluno encontrado com sucesso!`);
+                console.log(`     ID: ${aluno.id}`);
+                console.log(`     Nome: ${aluno.nome}`);
+                console.log(`     Turma: ${aluno.turma}`);
+                console.log(`     Notas: [${aluno.notas.join(", ")}]`);
+                resolve();
+            })
+            .catch((erro) => {
+                console.log(`\n   Erro retornado pela API:`);
+                console.log(`   ${erro.message}`);
+                resolve();
+            });
+    });
+
     await aguardarContinuar();
 }
 
