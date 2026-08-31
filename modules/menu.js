@@ -1,5 +1,5 @@
 import readline from "readline";
-import { buscarAluno } from "./api.js";
+import { buscarAluno, cadastrarAluno, analisarTurma } from "./api.js";
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -120,9 +120,19 @@ async function menuCadastrar(sistema) {
     let notas = await pedirNotas();
     let turma = await pedirTurma();
 
-    sistema.cadastrarAluno(nome, notas, turma);
+    console.log(`\n  Cadastrando aluno na API... Aguarde.`);
 
-    console.log(`\n  [+] Aluno "${nome}" cadastrado com sucesso!`);
+    try {
+        const alunoCadastrado = await cadastrarAluno(nome, notas, turma);
+        if (sistema) {
+            sistema.cadastrarAluno(nome, notas, turma);
+        }
+        console.log(`\n  Aluno "${alunoCadastrado.nome}" cadastrado com sucesso! (ID: ${alunoCadastrado.id})`);
+    } catch (erro) {
+        console.log(`\n  Erro ao cadastrar aluno:`);
+        console.log(`  ${erro.message}`);
+    }
+
     await aguardarContinuar();
 }
 
@@ -139,29 +149,35 @@ async function menuAnalisarTurma(sistema) {
     let nomeTurma = TURMAS[escolha];
 
     if (nomeTurma) {
-        exibirAnaliseTurma(sistema, nomeTurma);
+        console.log(`\n  Consultando análise da turma na API... Aguarde.`);
+        try {
+            const analise = await analisarTurma(nomeTurma);
+            exibirAnaliseTurma(analise);
+        } catch (erro) {
+            console.log(`\n  Erro retornado pela API:`);
+            console.log(`  ${erro.message}`);
+        }
     } else {
-        console.log("\n  [!] Turma invalida!");
+        console.log("\n  Turma invalida!");
     }
     await aguardarContinuar();
 }
 
-function exibirAnaliseTurma(sistema, nomeTurma) {
-    const turma = sistema.getTurma(nomeTurma);
-
+function exibirAnaliseTurma(analise) {
     console.log(`\n${"=".repeat(45)}`);
-    console.log(`   ANALISE DA TURMA: ${nomeTurma}`);
+    console.log(`   ANALISE DA TURMA: ${analise.turma}`);
     console.log(`${"=".repeat(45)}`);
 
-    if (!turma || turma.alunos.length === 0) {
+    if (!analise.alunos || analise.alunos.length === 0) {
         console.log("\n  Nenhum aluno cadastrado nesta turma.");
     } else {
-        for (const aluno of turma.alunos) {
-            console.log(`  - ${aluno.nome} | Media: ${aluno.calcularMedia().toFixed(2)} | ${aluno.getStatus()}`);
+        for (const aluno of analise.alunos) {
+            console.log(`  - ${aluno.nome} | Media: ${aluno.media.toFixed(2)} | ${aluno.status}`);
         }
         console.log(`${"-".repeat(45)}`);
-        console.log(`  Aprovados:  ${turma.getAprovados().length}`);
-        console.log(`  Reprovados: ${turma.getReprovados().length}`);
+        console.log(`  Media da Turma: ${analise.mediaTurma.toFixed(2)}`);
+        console.log(`  Aprovados:  ${analise.aprovados.length}`);
+        console.log(`  Reprovados: ${analise.reprovados.length}`);
     }
 
     console.log(`${"=".repeat(45)}\n`);
@@ -231,22 +247,17 @@ async function menuBuscarAlunoAPI() {
 
     console.log(`\n  Consultando API... Aguarde.`);
 
-    await new Promise((resolve) => {
-        buscarAluno(id)
-            .then((aluno) => {
-                console.log(`\n   Aluno encontrado com sucesso!`);
-                console.log(`     ID: ${aluno.id}`);
-                console.log(`     Nome: ${aluno.nome}`);
-                console.log(`     Turma: ${aluno.turma}`);
-                console.log(`     Notas: [${aluno.notas.join(", ")}]`);
-                resolve();
-            })
-            .catch((erro) => {
-                console.log(`\n   Erro retornado pela API:`);
-                console.log(`   ${erro.message}`);
-                resolve();
-            });
-    });
+    try {
+        const aluno = await buscarAluno(id);
+        console.log(`\n   Aluno encontrado com sucesso!`);
+        console.log(`     ID: ${aluno.id}`);
+        console.log(`     Nome: ${aluno.nome}`);
+        console.log(`     Turma: ${aluno.turma}`);
+        console.log(`     Notas: [${aluno.notas.join(", ")}]`);
+    } catch (erro) {
+        console.log(`\n   Erro retornado pela API:`);
+        console.log(`   ${erro.message}`);
+    }
 
     await aguardarContinuar();
 }
