@@ -122,16 +122,21 @@ async function menuCadastrar(sistema) {
 
     console.log(`\n  Cadastrando aluno na API... Aguarde.`);
 
-    try {
-        const alunoCadastrado = await cadastrarAluno(nome, notas, turma);
-        if (sistema) {
-            sistema.cadastrarAluno(nome, notas, turma);
-        }
-        console.log(`\n  Aluno "${alunoCadastrado.nome}" cadastrado com sucesso! (ID: ${alunoCadastrado.id})`);
-    } catch (erro) {
-        console.log(`\n  Erro ao cadastrar aluno:`);
-        console.log(`  ${erro.message}`);
-    }
+    await cadastrarAluno(nome, notas, turma)
+        .then((alunoCadastrado) => {
+            if (sistema) {
+                sistema.cadastrarAluno(nome, notas, turma);
+            }
+            console.log(`\n   Aluno cadastrado com sucesso!`);
+            console.log(`     ID: ${alunoCadastrado.id}`);
+            console.log(`     Nome: ${alunoCadastrado.nome}`);
+            console.log(`     Turma: ${alunoCadastrado.turma}`);
+            console.log(`     Notas: [${alunoCadastrado.notas.join(", ")}]`);
+        })
+        .catch((erro) => {
+            console.log(`\n   Erro retornado pela API:`);
+            console.log(`   ${erro.message}`);
+        });
 
     await aguardarContinuar();
 }
@@ -149,16 +154,17 @@ async function menuAnalisarTurma(sistema) {
     let nomeTurma = TURMAS[escolha];
 
     if (nomeTurma) {
-        console.log(`\n  Consultando análise da turma na API... Aguarde.`);
-        try {
-            const analise = await analisarTurma(nomeTurma);
-            exibirAnaliseTurma(analise);
-        } catch (erro) {
-            console.log(`\n  Erro retornado pela API:`);
-            console.log(`  ${erro.message}`);
-        }
+        console.log(`\n  Consultando API... Aguarde.`);
+        await analisarTurma(nomeTurma)
+            .then((analise) => {
+                exibirAnaliseTurma(analise);
+            })
+            .catch((erro) => {
+                console.log(`\n   Erro retornado pela API:`);
+                console.log(`   ${erro.message}`);
+            });
     } else {
-        console.log("\n  Turma invalida!");
+        console.log("\n  [!] Turma invalida!");
     }
     await aguardarContinuar();
 }
@@ -247,17 +253,18 @@ async function menuBuscarAlunoAPI() {
 
     console.log(`\n  Consultando API... Aguarde.`);
 
-    try {
-        const aluno = await buscarAluno(id);
-        console.log(`\n   Aluno encontrado com sucesso!`);
-        console.log(`     ID: ${aluno.id}`);
-        console.log(`     Nome: ${aluno.nome}`);
-        console.log(`     Turma: ${aluno.turma}`);
-        console.log(`     Notas: [${aluno.notas.join(", ")}]`);
-    } catch (erro) {
-        console.log(`\n   Erro retornado pela API:`);
-        console.log(`   ${erro.message}`);
-    }
+    await buscarAluno(id)
+        .then((aluno) => {
+            console.log(`\n   Aluno encontrado com sucesso!`);
+            console.log(`     ID: ${aluno.id}`);
+            console.log(`     Nome: ${aluno.nome}`);
+            console.log(`     Turma: ${aluno.turma}`);
+            console.log(`     Notas: [${aluno.notas.join(", ")}]`);
+        })
+        .catch((erro) => {
+            console.log(`\n   Erro retornado pela API:`);
+            console.log(`   ${erro.message}`);
+        });
 
     await aguardarContinuar();
 }
